@@ -43,9 +43,9 @@ body{
 }
 .sub-title{color:#aaa; margin-bottom:25px; font-size: 13px;}
 
-/* MENÚS PRINCIPALES (CYAN Y MORADO METÁLICO) */
+/* MENÚS PRINCIPALES */
 .menu-principal {
-    display: flex !important;
+    display: flex;
     flex-direction: column;
     gap: 16px;
     max-width: 310px;
@@ -90,7 +90,7 @@ body{
     border-color: #9b51e0;
 }
 
-/* SECCIONES OCULTAS */
+/* CONTROL DE VISIBILIDAD SEGURO */
 .seccion-flujo, .seccion-cotizador {
     display: none;
 }
@@ -205,20 +205,17 @@ body{
 </head>
 <body>
 
-<!-- LOGO COMPLETO XE SERVICIO ELECTRÓNICO -->
 <div class="brand-container">
     <h1 class="logo-main">XE</h1>
     <p class="logo-sub">SERVICIO ELECTRÓNICO</p>
 </div>
 <p class="sub-title">Sistema Profesional de Cotizaciones</p>
 
-<!-- BOTONES PRINCIPALES DE ENTRADA -->
 <div id="menuRaiz" class="menu-principal">
     <button class="btn-menu-raiz" onclick="irAFlujo('controles')">🎮 Cotizar Controles</button>
     <button class="btn-menu-raiz" onclick="irAFlujo('consolas')">🕹️ Cotizar Consolas</button>
 </div>
 
-<!-- SUB-MENÚ CONTROLES (SE ACTIVA AL TOCAR SU BOTÓN) -->
 <div id="flujoControles" class="seccion-flujo">
     <button class="btn-volver" onclick="volverAlMenuRaiz()">← Cambiar Tipo de Servicio</button>
     <div class="menu-controles">
@@ -230,7 +227,6 @@ body{
     </div>
 </div>
 
-<!-- SUB-MENÚ CONSOLAS (SE ACTIVA AL TOCAR SU BOTÓN) -->
 <div id="flujoConsolas" class="seccion-flujo">
     <button class="btn-volver" onclick="volverAlMenuRaiz()">← Cambiar Tipo de Servicio</button>
     <div class="menu-controles">
@@ -244,7 +240,6 @@ body{
     </div>
 </div>
 
-<!-- LISTADO DE PIEZAS Y SERVICIOS -->
 <div id="seccionCotizador" class="seccion-cotizador">
     <button class="btn-volver" id="btnAtrasFlujo">← Volver</button>
     
@@ -403,9 +398,9 @@ function irAFlujo(flujo) {
     tipoFlujoActivo = flujo;
     document.getElementById("menuRaiz").style.display = "none";
     if(flujo === 'controles') {
-        document.getElementById("flujoControles").style.display = "block";
+        document.getElementById("flujoControles").style.display = "flex";
     } else {
-        document.getElementById("flujoConsolas").style.display = "block";
+        document.getElementById("flujoConsolas").style.display = "flex";
     }
 }
 
@@ -454,7 +449,7 @@ function mostrarCotizador(flujo, modelo) {
 function minAHorasTexto(minutosTotales) {
     if (minutosTotales < 60) return `${minutosTotales} min`;
     let horas = Math.floor(minutosTotales / 60);
-    let mins = minutosTotales % 60;
+    let mins = minutes = minutosTotales % 60;
     return mins > 0 ? `${horas} hr y ${mins} min` : `${horas} hr`;
 }
 
@@ -496,4 +491,9 @@ function update(){
         if(!list.length) return;
         saveHistory(subtotal, totalNeto, descuento, list);
         
-        let msg = `🛠️ *XE SERVICIO ELECT
+        let msg = `🛠️ *XE SERVICIO ELECTRÓNICO*\n`;
+        msg += `⚡ _Cotización de Servicio_\n\n`;
+        msg += `📦 *Modelo:* ${modeloActivo}\n`;
+        msg += `📝 *Servicios:* \n${list.map(p=>"• "+p).join("\n")}\n\n`;
+        msg += `⏱️ *Tiempo aprox:* ${minAHorasTexto(minutosTotales)}\n`;
+    
