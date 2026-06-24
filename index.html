@@ -68,11 +68,6 @@ body{
     font-weight: bold;
     cursor: pointer;
     box-shadow: 0 4px 15px rgba(155, 81, 224, 0.3);
-    transition: 0.2s;
-}
-.btn-menu-raiz:active {
-    background: #9b51e0;
-    box-shadow: 0 0 20px #00d4ff;
 }
 .btn-control {
     background: #111424;
@@ -83,14 +78,9 @@ body{
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    transition: 0.2s;
-}
-.btn-control:active {
-    background: #0d2330;
-    border-color: #9b51e0;
 }
 
-/* CONTROL DE VISIBILIDAD SEGURO */
+/* ESTADOS DE VISIBILIDAD MÁS SEGUROS */
 .seccion-flujo, .seccion-cotizador {
     display: none;
 }
@@ -138,7 +128,6 @@ body{
 .item.active{
     border-color: #00d4ff;
     background: #0d2330;
-    box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
 }
 .item.active .price-time {
     color: #00ff99;
@@ -152,7 +141,6 @@ body{
     max-width: 450px;
     margin: 20px auto;
     border: 1px solid #2b1a4a;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.6);
 }
 .total{
     font-size:2.4rem;
@@ -396,18 +384,22 @@ const BD_SERVICIOS = {
 
 function irAFlujo(flujo) {
     tipoFlujoActivo = flujo;
-    document.getElementById("menuRaiz").style.display = "none";
+    document.getElementById("menuRaiz").style.setProperty("display", "none", "important");
+    document.getElementById("flujoControles").style.display = "none";
+    document.getElementById("flujoConsolas").style.display = "none";
+    
     if(flujo === 'controles') {
-        document.getElementById("flujoControles").style.display = "flex";
+        document.getElementById("flujoControles").style.setProperty("display", "flex", "important");
     } else {
-        document.getElementById("flujoConsolas").style.display = "flex";
+        document.getElementById("flujoConsolas").style.setProperty("display", "flex", "important");
     }
 }
 
 function volverAlMenuRaiz() {
     document.getElementById("flujoControles").style.display = "none";
     document.getElementById("flujoConsolas").style.display = "none";
-    document.getElementById("menuRaiz").style.display = "flex";
+    document.getElementById("seccionCotizador").style.display = "none";
+    document.getElementById("menuRaiz").style.setProperty("display", "flex", "important");
     historyBox.style.display = "none";
 }
 
@@ -417,7 +409,7 @@ function mostrarCotizador(flujo, modelo) {
     
     document.getElementById("flujoControles").style.display = "none";
     document.getElementById("flujoConsolas").style.display = "none";
-    document.getElementById("seccionCotizador").style.display = "block";
+    document.getElementById("seccionCotizador").style.setProperty("display", "block", "important");
     document.getElementById("tituloModelo").textContent = modeloActivo;
     
     document.getElementById("btnAtrasFlujo").onclick = () => {
@@ -449,7 +441,7 @@ function mostrarCotizador(flujo, modelo) {
 function minAHorasTexto(minutosTotales) {
     if (minutosTotales < 60) return `${minutosTotales} min`;
     let horas = Math.floor(minutosTotales / 60);
-    let mins = minutes = minutosTotales % 60;
+    let mins = minutosTotales % 60;
     return mins > 0 ? `${horas} hr y ${mins} min` : `${horas} hr`;
 }
 
@@ -495,5 +487,4 @@ function update(){
         msg += `⚡ _Cotización de Servicio_\n\n`;
         msg += `📦 *Modelo:* ${modeloActivo}\n`;
         msg += `📝 *Servicios:* \n${list.map(p=>"• "+p).join("\n")}\n\n`;
-        msg += `⏱️ *Tiempo aprox:* ${minAHorasTexto(minutosTotales)}\n`;
-    
+        msg += `⏱️ *Tiemp
