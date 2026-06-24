@@ -15,32 +15,43 @@ body{
     margin:0;
 }
 
-/* LOGO Y EMBLEMA */
+/* LOGO XE SERVICIO ELECTRÓNICO */
 .brand-container {
-    margin: 20px auto 10px;
+    margin: 25px auto 15px;
+    padding: 10px;
+    border: 2px dashed #9b51e0;
+    border-radius: 12px;
+    max-width: 300px;
+    background: rgba(155, 81, 224, 0.05);
 }
 .logo-main {
-    font-size: 32px;
+    font-size: 36px;
     font-weight: 900;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     background: linear-gradient(135deg, #00d4ff, #9b51e0);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
     margin: 0;
 }
 .logo-sub {
-    font-size: 11px;
+    font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 4px;
     color: #00d4ff;
-    margin: 2px 0 0 0;
-    font-weight: 600;
+    margin: 5px 0 0 0;
+    font-weight: bold;
 }
 .sub-title{color:#aaa; margin-bottom:25px; font-size: 13px;}
 
-/* MENÚS DE SELECCIÓN */
-.menu-principal, .menu-controles {
+/* MENÚS PRINCIPALES (CYAN Y MORADO METÁLICO) */
+.menu-principal {
+    display: flex !important;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 310px;
+    margin: 30px auto;
+}
+.menu-controles {
     display: flex;
     flex-direction: column;
     gap: 14px;
@@ -51,32 +62,32 @@ body{
     background: linear-gradient(135deg, #161026, #23133d);
     color: #fff;
     border: 2px solid #9b51e0;
-    padding: 18px;
-    border-radius: 14px;
+    padding: 20px;
+    border-radius: 16px;
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(155, 81, 224, 0.15);
+    box-shadow: 0 4px 15px rgba(155, 81, 224, 0.3);
     transition: 0.2s;
 }
 .btn-menu-raiz:active {
     background: #9b51e0;
-    box-shadow: 0 0 15px #9b51e0;
+    box-shadow: 0 0 20px #00d4ff;
 }
 .btn-control {
-    background: #131924;
+    background: #111424;
     color: #fff;
-    border: 2px solid #223147;
-    padding: 14px;
+    border: 2px solid #00d4ff;
+    padding: 15px;
     border-radius: 12px;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: bold;
     cursor: pointer;
     transition: 0.2s;
 }
 .btn-control:active {
-    background: #0a2a33;
-    border-color: #00d4ff;
+    background: #0d2330;
+    border-color: #9b51e0;
 }
 
 /* SECCIONES OCULTAS */
@@ -87,20 +98,20 @@ body{
     background: #25183a;
     color: #00d4ff;
     border: 1px solid #00d4ff;
-    padding: 8px 16px;
+    padding: 10px 18px;
     border-radius: 8px;
     cursor: pointer;
-    margin-bottom: 15px;
-    font-size: 13px;
+    margin-bottom: 20px;
+    font-size: 14px;
     font-weight: bold;
 }
 
 .section-title{
     margin: 15px 0;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
     color: #00d4ff;
-    text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
 }
 .grid{
     display:flex;
@@ -127,13 +138,13 @@ body{
 .item.active{
     border-color: #00d4ff;
     background: #0d2330;
-    box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
 }
 .item.active .price-time {
     color: #00ff99;
 }
 
-/* CAJA DE RESUMEN FINAL */
+/* RESUMEN BOX */
 .resumen-box {
     background: #0f0b1a;
     border-radius: 16px;
@@ -141,10 +152,10 @@ body{
     max-width: 450px;
     margin: 20px auto;
     border: 1px solid #2b1a4a;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.6);
 }
 .total{
-    font-size:2.3rem;
+    font-size:2.4rem;
     margin:5px 0;
     color:#00ff99;
     font-weight: bold;
@@ -176,7 +187,6 @@ body{
     color: #fff; 
     width: 85%; 
     max-width: 300px;
-    box-shadow: 0 4px 12px rgba(0,200,83,0.3);
 }
 .clear{background:#42111c; color:#ff3b30; border: 1px solid #ff3b30;}
 .hist{background:#2a233d; color:#b59eff; border: 1px solid #564780;}
@@ -195,19 +205,20 @@ body{
 </head>
 <body>
 
+<!-- LOGO COMPLETO XE SERVICIO ELECTRÓNICO -->
 <div class="brand-container">
     <h1 class="logo-main">XE</h1>
-    <p class="logo-sub">Servicio Electrónico</p>
+    <p class="logo-sub">SERVICIO ELECTRÓNICO</p>
 </div>
-<p class="sub-title">Cotizador Inteligente de Precios</p>
+<p class="sub-title">Sistema Profesional de Cotizaciones</p>
 
-<!-- MENÚ RAÍZ PRINCIPAL -->
+<!-- BOTONES PRINCIPALES DE ENTRADA -->
 <div id="menuRaiz" class="menu-principal">
     <button class="btn-menu-raiz" onclick="irAFlujo('controles')">🎮 Cotizar Controles</button>
     <button class="btn-menu-raiz" onclick="irAFlujo('consolas')">🕹️ Cotizar Consolas</button>
 </div>
 
-<!-- FLUJO CONTROLES -->
+<!-- SUB-MENÚ CONTROLES (SE ACTIVA AL TOCAR SU BOTÓN) -->
 <div id="flujoControles" class="seccion-flujo">
     <button class="btn-volver" onclick="volverAlMenuRaiz()">← Cambiar Tipo de Servicio</button>
     <div class="menu-controles">
@@ -219,7 +230,7 @@ body{
     </div>
 </div>
 
-<!-- FLUJO CONSOLAS -->
+<!-- SUB-MENÚ CONSOLAS (SE ACTIVA AL TOCAR SU BOTÓN) -->
 <div id="flujoConsolas" class="seccion-flujo">
     <button class="btn-volver" onclick="volverAlMenuRaiz()">← Cambiar Tipo de Servicio</button>
     <div class="menu-controles">
@@ -233,7 +244,7 @@ body{
     </div>
 </div>
 
-<!-- SECCIÓN PANEL DE COTIZACIÓN -->
+<!-- LISTADO DE PIEZAS Y SERVICIOS -->
 <div id="seccionCotizador" class="seccion-cotizador">
     <button class="btn-volver" id="btnAtrasFlujo">← Volver</button>
     
@@ -258,7 +269,7 @@ body{
 <script>
 const phone = "527471731852";
 const historyBox = document.getElementById("history");
-let tipoFlujoActivo = ""; // "controles" o "consolas"
+let tipoFlujoActivo = ""; 
 let modeloActivo = "";
 
 const BD_SERVICIOS = {
@@ -464,7 +475,6 @@ function update(){
     let descuento = 0;
     let totalNeto = subtotal;
 
-    // Solo aplica descuento si el flujo activo es de CONTROLES y llega o pasa de los $600 pesos
     if(tipoFlujoActivo === "controles" && subtotal >= 600) {
         descuento = Math.round(subtotal * 0.15);
         totalNeto = subtotal - descuento;
@@ -486,8 +496,4 @@ function update(){
         if(!list.length) return;
         saveHistory(subtotal, totalNeto, descuento, list);
         
-        let msg = `🛠️ *XE SERVICIO ELECTRÓNICO*\n`;
-        msg += `⚡ _Cotización de Servicio_\n\n`;
-        msg += `📦 *Modelo:* ${modeloActivo}\n`;
-        msg += `📝 *Servicios:* \n${list.map(p=>"• "+p).join("\n")}\n\n`;
-        msg +=
+        let msg = `🛠️ *XE SERVICIO ELECT
