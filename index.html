@@ -22,7 +22,6 @@ padding:4px;
 border-radius:20px;
 }
 
-/* BORDE NEÓN */
 .container::before{
 content:"";
 position:absolute;
@@ -45,12 +44,6 @@ pointer-events:none;
 100%{background-position:100% 50%;}
 }
 
-/* LOGO ÍCONO XE */
-.logo{
-text-align:center;
-padding:20px;
-}
-
 .xe-icon{
 width:120px;
 height:120px;
@@ -64,27 +57,20 @@ font-weight:bold;
 color:#00ffff;
 background:rgba(0,0,0,0.4);
 border:2px solid #00ffff;
-text-shadow:0 0 10px #00ffff, 0 0 25px #8a2be2;
-box-shadow:0 0 20px #00ffff, 0 0 40px #8a2be2;
-animation:xePulse 2s infinite ease-in-out;
+text-shadow:0 0 10px #00ffff,0 0 25px #8a2be2;
+box-shadow:0 0 20px #00ffff,0 0 40px #8a2be2;
+animation:xePulse 2s infinite;
 }
 
 @keyframes xePulse{
-0%,100%{
-transform:scale(1);
-box-shadow:0 0 15px #00ffff,0 0 30px #8a2be2;
-}
-50%{
-transform:scale(1.08);
-box-shadow:0 0 25px #00ffff,0 0 60px #8a2be2;
-}
+0%,100%{transform:scale(1);}
+50%{transform:scale(1.08);}
 }
 
 .neon{
+text-align:center;
 font-size:18px;
 letter-spacing:6px;
-text-transform:uppercase;
-color:white;
 margin-top:10px;
 animation:neonGlow 1.5s infinite alternate;
 }
@@ -94,7 +80,6 @@ from{text-shadow:0 0 5px #00ffff,0 0 10px #8a2be2;}
 to{text-shadow:0 0 20px #00ffff,0 0 35px #8a2be2;}
 }
 
-/* CARD */
 .card{
 background:rgba(255,255,255,0.05);
 padding:15px;
@@ -102,7 +87,6 @@ margin:15px 0;
 border-radius:15px;
 }
 
-/* INPUTS */
 select,input,textarea{
 width:100%;
 padding:10px;
@@ -113,7 +97,6 @@ background:#111;
 color:white;
 }
 
-/* BOTONES */
 button{
 width:100%;
 padding:15px;
@@ -126,27 +109,23 @@ margin-top:10px;
 
 .wa{background:linear-gradient(90deg,#00ffff,#8a2be2);color:white;}
 .pay{background:linear-gradient(90deg,#8a2be2,#00ffff);color:white;}
+.clear{background:#ff004c;color:white;}
 .link{background:#111;border:1px solid #00ffff;color:#00ffff;}
 
-/* RESULTADOS */
 .result{
 background:#0d0d0d;
 padding:10px;
 border-radius:10px;
 }
 
-.total{
-font-size:28px;
-color:#00ffff;
-}
+.total{font-size:28px;color:#00ffff;}
+.discount{color:#00ff99;}
 
-/* PAGOS */
 .paybox{
 background:#0d0d0d;
 padding:15px;
 border-radius:15px;
 border:1px solid #00ffff;
-margin-top:15px;
 }
 .paybox h3{color:#00ffff;}
 </style>
@@ -156,21 +135,19 @@ margin-top:15px;
 
 <div class="container">
 
-<div class="logo">
-
 <div class="xe-icon">XE</div>
-
 <div class="neon">SERVICIO ELECTRÓNICO</div>
-
-</div>
 
 <div class="card">
 
 <label>Consola</label>
 <select id="consola" onchange="loadServices()"></select>
 
-<label>Servicio</label>
-<select id="servicio" onchange="calc()"></select>
+<label>Servicio 1</label>
+<select id="s1" onchange="calc()"></select>
+
+<label>Servicio 2</label>
+<select id="s2" onchange="calc()"></select>
 
 <label>Cliente</label>
 <input id="cliente">
@@ -179,151 +156,150 @@ margin-top:15px;
 <textarea id="obs"></textarea>
 
 <div class="result">
-💰 Precio: <span id="precio">$0</span><br>
-⏱ Tiempo: <span id="tiempo">-</span><br>
-<div class="total">TOTAL: <span id="total">$0</span></div>
+💰 Subtotal: <span id="sub">$0</span><br>
+💥 Descuento (10% si 2 servicios): <span id="disc">$0</span><br>
+💰 Total: <span id="total">$0</span>
 </div>
 
-<button class="wa" onclick="sendWA()">📲 WhatsApp</button>
-<button class="pay" onclick="agendar()">💳 Anticipo y agendar</button>
+<button class="wa" onclick="sendWA()">WhatsApp</button>
+<button class="pay" onclick="agendar()">Anticipo y agendar</button>
+<button class="clear" onclick="clearAll()">🧹 Limpiar cotización</button>
 
 <button class="link" onclick="window.open('https://deathmaskxe.github.io/CotizadorXE/')">
-🕹 Cotizador de Controles
+Cotizador Controles
 </button>
 
 <button class="link" onclick="window.open('https://deathmaskxe.github.io/Tester-de-funcionalidad-controles/')">
-🎮 Tester de Controles
+Tester Controles
 </button>
 
 </div>
 
-<!-- PAGOS -->
 <div class="paybox">
-
-<h3>💳 Datos de pago</h3>
-
-<p>🏦 Banorte</p>
-<p>4189 1400 1021 7767</p>
-<p>Irving Daniel Sánchez</p>
-
-<hr>
-
-<p>💼 MercadoPago</p>
-<p>722969020089368829</p>
-<p>Irving Daniel Sánchez Nava</p>
-
-<p style="color:#00ffff;">
-Envía comprobante por WhatsApp para confirmar cita
-</p>
-
+<h3>Pagos</h3>
+<p>Banorte: 4189 1400 1021 7767</p>
+<p>MercadoPago: 722969020089368829</p>
 </div>
 
 </div>
 
 <script>
 
-const data = {
+const data={
 
 "Xbox One":[
 ["Revisión / Diagnóstico",200,"1 a 2 días"],
-["Mantenimiento",600,"1 Hora"],
-["Cambio ventilador",400,"15 Min"],
-["Cambio módulo inalámbrico",400,"15 Min"],
-["Panel frontal",600,"15 Min"],
-["MOSFET",900,"1 Hora"],
-["Realtek",900,"40 Min"],
-["Filtros o ESD",900,"1 Hora"],
-["HDMI",900,"1 Hora"],
-["IC Power",1000,"1 Hora"]
+["Mantenimiento",600,"1hra"],
+["Cambio de ventilador",400,"15min"],
+["Cambio de módulo inalámbrico",400,"15min"],
+["Cambio de panel frontal",600,"15min"],
+["Reparación corto en mosfet",900,"1hra"],
+["Reparación corto en Realtek",900,"40min"],
+["Reparación corto en filtros o ESD",900,"1hra"],
+["Reparación HDMI",900,"1hra"],
+["Reparación IC Power",1000,"1hra"]
 ],
 
 "Xbox One S":[
 ["Revisión / Diagnóstico",200,"1 a 2 días"],
-["Mantenimiento",600,"1 Hora"],
-["Ventilador",500,"15 Min"],
-["Módulo inalámbrico",500,"15 Min"],
-["Panel frontal",600,"15 Min"],
-["MOSFET",1000,"1 Hora"],
-["Realtek",1000,"40 Min"],
-["Filtros",600,"1 Hora"],
-["ESD",1200,"1 Hora"],
-["HDMI",1000,"1 Hora"],
-["IC Power",1200,"1 Hora"],
-["Retimer",1000,"1 Hora"],
-["Carcasa",800,"30 Min"]
+["Mantenimiento",600,"1hra"],
+["Cambio de ventilador",500,"15min"],
+["Cambio de módulo inalámbrico",500,"15min"],
+["Cambio de panel frontal",600,"15min"],
+["Reparación corto en mosfet",1000,"1hra"],
+["Reparación corto en Realtek",1000,"40min"],
+["Reparación corto en filtros",600,""],
+["Reparación ESD",1200,"1hra"],
+["Reparación HDMI",1000,"1hra"],
+["Reparación IC Power",1200,"1hra"],
+["Reparación retimer",1000,"1hra"],
+["Cambio de carcasa",800,"30min"]
 ],
 
 "Xbox Series S":[
 ["Revisión / Diagnóstico",200,"1 a 2 días"],
-["Mantenimiento",1200,"1 Hora"],
-["HDMI",1300,"1 Hora"],
-["Bluetooth",800,"10 Min"],
-["WiFi",900,"10 Min"],
-["Retimer",1500,"1 Hora"],
-["ESD",1800,"4 Hrs"],
-["SSD",2300,"2 Hrs"],
-["Ethernet",1200,"1 Hora"],
-["RAM/APU",2000,"2 Hrs"],
-["MOSFET",1500,"2 Hrs"],
-["Fuente",900,"3 Hrs"],
-["Cambio fuente",1200,"20 Min"],
-["Ventilador",1000,"10 Min"]
+["Mantenimiento",1200,"1hra"],
+["Cambio de HDMI",1300,"1hra"],
+["Cambio módulo Bluetooth",800,"10min"],
+["Cambio módulo wifi",900,"10min"],
+["Reparación retimer",1500,"1hra"],
+["Reparación ESD",1800,"4hrs"],
+["Reparación SSD",2300,"2hrs"],
+["Reparación puerto ethernet",1200,"1hra"],
+["Reparación controlador ram, apu",2000,"2hrs"],
+["Reparación mosfet",1500,"2hrs"],
+["Reparación fuente",900,"3hrs"],
+["Cambio fuente",1200,"20min"],
+["Cambio ventilador",1000,"10min"]
 ],
 
 "Xbox Series X":[
 ["Revisión / Diagnóstico",200,"1 a 2 días"],
-["Mantenimiento",1500,"1 Hora"],
-["HDMI",1500,"1 Hora"],
-["Bluetooth",1000,"10 Min"],
-["WiFi",1000,"10 Min"],
-["Retimer",1800,"1 Hora"],
-["ESD",2200,"5 Hrs"],
-["SSD",5000,"2 Hrs"],
-["Ethernet",1500,"1 Hora"],
-["RAM/APU",2600,"2 Hrs"],
-["MOSFET",1800,"2 Hrs"],
-["Fuente",1200,"3 Hrs"],
-["Cambio fuente",1500,"20 Min"],
-["Ventilador",1400,"10 Min"]
+["Mantenimiento",1500,"1hra"],
+["Cambio de HDMI",1500,"1hra"],
+["Cambio módulo Bluetooth",1000,"10min"],
+["Cambio módulo wifi",1000,"10min"],
+["Reparación retimer",1800,"1hra"],
+["Reparación ESD",2200,"5hrs"],
+["Reparación SSD",5000,"2hrs"],
+["Reparación puerto ethernet",1500,"1hra"],
+["Reparación controlador ram, apu",2600,"2hrs"],
+["Reparación mosfet",1800,"2hrs"],
+["Reparación fuente",1200,"3hrs"],
+["Cambio fuente",1500,"20min"],
+["Cambio ventilador",1400,"10min"]
 ],
 
 "PS4":[
 ["Revisión / Diagnóstico",200,"1 a 2 días"],
-["Mantenimiento",700,"1 Hora"],
-["Disco 1TB",2000,"1 Hora"],
-["Disco 500GB",1600,"1 Hora"],
-["HDMI",1000,"1 Hora"],
-["Encoder",1100,"1 Hora"],
-["Lectora",1000,"2 Hrs"]
+["Mantenimiento",700,"1hra"],
+["Cambio de disco duro 1 tera",2000,"1hra"],
+["Cambio disco duro 500g",1600,"1hra"],
+["Cambio HDMI",1000,"1hra"],
+["Cambio IC video Encoder",1100,"1hra"],
+["Reparación lectora",1000,"2hrs"]
 ],
 
 "PS4 Pro":[
 ["Revisión / Diagnóstico",200,"1 a 2 días"],
-["Mantenimiento",900,"1 Hora"],
-["Disco 1TB",2000,"1 Hora"],
-["Disco 500GB",1600,"1 Hora"],
-["HDMI",1000,"1 Hora"],
-["Encoder",1100,"1 Hora"],
-["Lectora",1200,"2 Hrs"]
+["Mantenimiento",900,"1hra"],
+["Cambio de disco duro 1 tera",2000,"1hra"],
+["Cambio disco duro 500g",1600,"1hra"],
+["Cambio HDMI",1000,"1hra"],
+["Cambio IC video Encoder",1100,"1hra"],
+["Reparación lectora",1200,"2hrs"]
 ],
 
 "PS5":[
 ["Revisión / Diagnóstico",200,"1 a 2 días"],
-["Mantenimiento",1500,"1 Hora"],
-["SSD chipset",2400,"1 Hora"],
-["HDMI",1500,"1 Hora"],
-["Encoder",1500,"1 Hora"],
-["Fuente",1200,"2 Hrs"],
-["Cambio fuente",1800,"30 Min"],
-["Southbridge",2500,"3 Hrs"],
-["BIOS",2000,"3 Hrs"],
-["IC/Fusible",2000,"4 Hrs"]
+["Mantenimiento",1500,"1hra"],
+["Cambio chipset SSD",2400,"1hra"],
+["Cambio HDMI",1500,"1hra"],
+["Cambio IC video Encoder",1500,"1hra"],
+["Reparación fuente de alimentación",1200,"2hrs"],
+["Cambio fuente de alimentación",1800,"30min"],
+["Cambio de Southbridge",2500,"3hrs"],
+["Cambio de BIOS",2000,"3hrs"],
+["Reparación de IC, fusible",2000,"4hrs"]
+],
+
+"Nintendo Switch":[
+["Magia Core",1500,"2hra"],
+["Magia Lite",1200,"2hra"],
+["Magia OLED",2000,"2hrs"],
+["IC de carga",1000,"20min"],
+["IC MT92T36",1300,"20min"],
+["IC backlight (sin video solo audio)",1000,"20min"],
+["Ventilador",600,"10min"],
+["Centro de carga",650,"20min"],
+["Mantenimiento",600,"45min"]
 ]
 
 };
 
 let c=document.getElementById("consola");
-let s=document.getElementById("servicio");
+let s1=document.getElementById("s1");
+let s2=document.getElementById("s2");
 
 Object.keys(data).forEach(x=>{
 let o=document.createElement("option");
@@ -333,56 +309,74 @@ c.appendChild(o);
 });
 
 function loadServices(){
-s.innerHTML="";
+
+s1.innerHTML="";
+s2.innerHTML="";
+
+let none1=document.createElement("option");
+none1.value=0;
+none1.textContent="Ningún servicio";
+
+let none2=document.createElement("option");
+none2.value=0;
+none2.textContent="Ningún servicio";
+
+s1.appendChild(none1);
+s2.appendChild(none2);
+
 data[c.value].forEach(x=>{
-let o=document.createElement("option");
-o.value=x[0];
-o.textContent=x[0];
-s.appendChild(o);
+let o1=document.createElement("option");
+o1.value=x[1];
+o1.textContent=x[0];
+s1.appendChild(o1);
+
+let o2=document.createElement("option");
+o2.value=x[1];
+o2.textContent=x[0];
+s2.appendChild(o2);
 });
+
 calc();
 }
 
 function calc(){
-let d=data[c.value].find(x=>x[0]===s.value);
-if(d){
-precio.innerText="$"+d[1];
-tiempo.innerText=d[2];
-total.innerText="$"+d[1];
+
+let v1=parseFloat(s1.value||0);
+let v2=parseFloat(s2.value||0);
+
+if(isNaN(v1)) v1=0;
+if(isNaN(v2)) v2=0;
+
+let sub=v1+v2;
+let disc=0;
+
+if(v1>0 && v2>0) disc=sub*0.10;
+
+document.getElementById("sub").innerText="$"+sub;
+document.getElementById("disc").innerText="$"+disc.toFixed(2);
+document.getElementById("total").innerText="$"+(sub-disc);
 }
+
+function clearAll(){
+s1.selectedIndex=0;
+s2.selectedIndex=0;
+document.getElementById("cliente").value="";
+document.getElementById("obs").value="";
+calc();
 }
 
 function sendWA(){
-let msg=`🎮 XE SERVICIO ELECTRÓNICO
-
-👤 ${cliente.value}
-🕹 ${c.value}
-🔧 ${s.value}
-
-💰 ${total.innerText}
-⏱ ${tiempo.innerText}
-
-📝 ${obs.value}`;
-
-window.open("https://wa.me/527471731852?text="+encodeURIComponent(msg));
+window.open("https://wa.me/527471731852?text="+encodeURIComponent(
+`XE SERVICIO ELECTRÓNICO
+Cliente: ${cliente.value}
+Consola: ${c.value}
+Total: ${document.getElementById("total").innerText}
+Falla: ${obs.value}`
+));
 }
 
 function agendar(){
-let msg=`💳 XE SERVICIO ELECTRÓNICO
-
-📅 AGENDAR REPARACIÓN
-
-👤 ${cliente.value}
-🕹 ${c.value}
-🔧 ${s.value}
-
-💰 ${total.innerText}
-💳 Anticipo $200
-
-🏦 Banorte / MercadoPago
-Enviar comprobante`;
-
-window.open("https://wa.me/527471731852?text="+encodeURIComponent(msg));
+window.open("https://wa.me/527471731852?text=Anticipo XE Servicio");
 }
 
 </script>
