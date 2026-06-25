@@ -3,488 +3,389 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>XE Cotizador Pro</title>
-<link rel="manifest" href="manifest.json">
+<title>XE Servicio Electrónico</title>
+
 <style>
 body{
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background:#0b0712;
-    color:#fff;
-    text-align:center;
-    padding:15px;
-    margin:0;
+margin:0;
+font-family:Arial;
+background:#050505;
+color:white;
+padding:20px;
 }
 
-/* LOGO XE SERVICIO ELECTRÓNICO */
-.brand-container {
-    margin: 25px auto 15px;
-    padding: 10px;
-    border: 2px dashed #9b51e0;
-    border-radius: 12px;
-    max-width: 300px;
-    background: rgba(155, 81, 224, 0.05);
-}
-.logo-main {
-    font-size: 36px;
-    font-weight: 900;
-    letter-spacing: 3px;
-    background: linear-gradient(135deg, #00d4ff, #9b51e0);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin: 0;
-}
-.logo-sub {
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    color: #00d4ff;
-    margin: 5px 0 0 0;
-    font-weight: bold;
-}
-.sub-title{color:#aaa; margin-bottom:25px; font-size: 13px;}
-
-/* MENÚS PRINCIPALES */
-.menu-principal {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    max-width: 310px;
-    margin: 30px auto;
-}
-.menu-controles {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    max-width: 310px;
-    margin: 25px auto;
-}
-.btn-menu-raiz {
-    background: linear-gradient(135deg, #161026, #23133d);
-    color: #fff;
-    border: 2px solid #9b51e0;
-    padding: 20px;
-    border-radius: 16px;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(155, 81, 224, 0.3);
-}
-.btn-control {
-    background: #111424;
-    color: #fff;
-    border: 2px solid #00d4ff;
-    padding: 15px;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
+.container{
+max-width:1000px;
+margin:auto;
+position:relative;
+padding:4px;
+border-radius:20px;
 }
 
-/* ESTADOS DE VISIBILIDAD MÁS SEGUROS */
-.seccion-flujo, .seccion-cotizador {
-    display: none;
-}
-.btn-volver {
-    background: #25183a;
-    color: #00d4ff;
-    border: 1px solid #00d4ff;
-    padding: 10px 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-bottom: 20px;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-.section-title{
-    margin: 15px 0;
-    font-size: 22px;
-    font-weight: bold;
-    color: #00d4ff;
-    text-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
-}
-.grid{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:10px;
-    margin-bottom: 20px;
-}
-.item{
-    background: linear-gradient(135deg, #121620, #191224);
-    padding:12px;
-    border-radius:12px;
-    cursor:pointer;
-    border:2px solid #252233;
-    width: 44%;
-    min-width:140px;
-    box-sizing: border-box;
-}
-.item .price-time {
-    font-size: 11px;
-    color: #aaa;
-    margin-top: 4px;
-}
-.item.active{
-    border-color: #00d4ff;
-    background: #0d2330;
-}
-.item.active .price-time {
-    color: #00ff99;
+/* BORDE NEÓN */
+.container::before{
+content:"";
+position:absolute;
+inset:0;
+border-radius:20px;
+padding:2px;
+background:linear-gradient(90deg,#00ffff,#8a2be2,#00ffff,#8a2be2);
+background-size:300% 300%;
+animation:borderMove 4s linear infinite;
+mask:
+linear-gradient(#000 0 0) content-box,
+linear-gradient(#000 0 0);
+mask-composite:exclude;
+-webkit-mask-composite:xor;
+pointer-events:none;
 }
 
-/* RESUMEN BOX */
-.resumen-box {
-    background: #0f0b1a;
-    border-radius: 16px;
-    padding: 15px;
-    max-width: 450px;
-    margin: 20px auto;
-    border: 1px solid #2b1a4a;
+@keyframes borderMove{
+0%{background-position:0% 50%;}
+100%{background-position:100% 50%;}
 }
+
+/* LOGO ÍCONO XE */
+.logo{
+text-align:center;
+padding:20px;
+}
+
+.xe-icon{
+width:120px;
+height:120px;
+margin:auto;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:50%;
+font-size:42px;
+font-weight:bold;
+color:#00ffff;
+background:rgba(0,0,0,0.4);
+border:2px solid #00ffff;
+text-shadow:0 0 10px #00ffff, 0 0 25px #8a2be2;
+box-shadow:0 0 20px #00ffff, 0 0 40px #8a2be2;
+animation:xePulse 2s infinite ease-in-out;
+}
+
+@keyframes xePulse{
+0%,100%{
+transform:scale(1);
+box-shadow:0 0 15px #00ffff,0 0 30px #8a2be2;
+}
+50%{
+transform:scale(1.08);
+box-shadow:0 0 25px #00ffff,0 0 60px #8a2be2;
+}
+}
+
+.neon{
+font-size:18px;
+letter-spacing:6px;
+text-transform:uppercase;
+color:white;
+margin-top:10px;
+animation:neonGlow 1.5s infinite alternate;
+}
+
+@keyframes neonGlow{
+from{text-shadow:0 0 5px #00ffff,0 0 10px #8a2be2;}
+to{text-shadow:0 0 20px #00ffff,0 0 35px #8a2be2;}
+}
+
+/* CARD */
+.card{
+background:rgba(255,255,255,0.05);
+padding:15px;
+margin:15px 0;
+border-radius:15px;
+}
+
+/* INPUTS */
+select,input,textarea{
+width:100%;
+padding:10px;
+margin:8px 0;
+border-radius:10px;
+border:none;
+background:#111;
+color:white;
+}
+
+/* BOTONES */
+button{
+width:100%;
+padding:15px;
+border:none;
+border-radius:12px;
+font-weight:bold;
+cursor:pointer;
+margin-top:10px;
+}
+
+.wa{background:linear-gradient(90deg,#00ffff,#8a2be2);color:white;}
+.pay{background:linear-gradient(90deg,#8a2be2,#00ffff);color:white;}
+.link{background:#111;border:1px solid #00ffff;color:#00ffff;}
+
+/* RESULTADOS */
+.result{
+background:#0d0d0d;
+padding:10px;
+border-radius:10px;
+}
+
 .total{
-    font-size:2.4rem;
-    margin:5px 0;
-    color:#00ff99;
-    font-weight: bold;
-}
-.descuento-box {
-    color: #ff3b30;
-    font-size: 14px;
-    font-weight: bold;
-    margin: -5px 0 10px 0;
-    display: none;
-}
-.tiempo-total {
-    color: #ffcc00;
-    font-size: 15px;
-    margin-bottom: 15px;
+font-size:28px;
+color:#00ffff;
 }
 
-.btn{
-    padding:14px 20px;
-    border:none;
-    border-radius:25px;
-    font-weight:bold;
-    cursor:pointer;
-    margin:5px;
-    font-size: 15px;
+/* PAGOS */
+.paybox{
+background:#0d0d0d;
+padding:15px;
+border-radius:15px;
+border:1px solid #00ffff;
+margin-top:15px;
 }
-.wsp{
-    background: linear-gradient(135deg, #00c853, #009624);
-    color: #fff; 
-    width: 85%; 
-    max-width: 300px;
-}
-.clear{background:#42111c; color:#ff3b30; border: 1px solid #ff3b30;}
-.hist{background:#2a233d; color:#b59eff; border: 1px solid #564780;}
-
-#history{
-    max-width:450px;
-    margin:20px auto;
-    text-align:left;
-    background:#110d1f;
-    padding:15px;
-    border-radius:12px;
-    border: 1px solid #251c3d;
-    display:none;
-}
+.paybox h3{color:#00ffff;}
 </style>
 </head>
+
 <body>
 
-<div class="brand-container">
-    <h1 class="logo-main">XE</h1>
-    <p class="logo-sub">SERVICIO ELECTRÓNICO</p>
-</div>
-<p class="sub-title">Sistema Profesional de Cotizaciones</p>
+<div class="container">
 
-<div id="menuRaiz" class="menu-principal">
-    <button class="btn-menu-raiz" onclick="irAFlujo('controles')">🎮 Cotizar Controles</button>
-    <button class="btn-menu-raiz" onclick="irAFlujo('consolas')">🕹️ Cotizar Consolas</button>
-</div>
+<div class="logo">
 
-<div id="flujoControles" class="seccion-flujo">
-    <button class="btn-volver" onclick="volverAlMenuRaiz()">← Cambiar Tipo de Servicio</button>
-    <div class="menu-controles">
-        <button class="btn-control" onclick="mostrarCotizador('controles', 'xbox')">🎮 Xbox Series</button>
-        <button class="btn-control" onclick="mostrarCotizador('controles', 'dualsense')">🎮 DualSense PS5</button>
-        <button class="btn-control" onclick="mostrarCotizador('controles', 'joycon')">🎮 Joycon Switch</button>
-        <button class="btn-control" onclick="mostrarCotizador('controles', 'elite')">🎮 Elite Series 2</button>
-        <button class="btn-control" onclick="mostrarCotizador('controles', 'edge')">🎮 DualSense Edge</button>
-    </div>
+<div class="xe-icon">XE</div>
+
+<div class="neon">SERVICIO ELECTRÓNICO</div>
+
 </div>
 
-<div id="flujoConsolas" class="seccion-flujo">
-    <button class="btn-volver" onclick="volverAlMenuRaiz()">← Cambiar Tipo de Servicio</button>
-    <div class="menu-controles">
-        <button class="btn-control" onclick="mostrarCotizador('consolas', 'xbone')">🕹️ Xbox One (Fat)</button>
-        <button class="btn-control" onclick="mostrarCotizador('consolas', 'xbones')">🕹️ Xbox One S</button>
-        <button class="btn-control" onclick="mostrarCotizador('consolas', 'xbseriess')">🕹️ Xbox Series S</button>
-        <button class="btn-control" onclick="mostrarCotizador('consolas', 'xbseriesx')">🕹️ Xbox Series X</button>
-        <button class="btn-control" onclick="mostrarCotizador('consolas', 'ps4slim')">🕹️ PlayStation 4 Slim/Fat</button>
-        <button class="btn-control" onclick="mostrarCotizador('consolas', 'ps4pro')">🕹️ PlayStation 4 Pro</button>
-        <button class="btn-control" onclick="mostrarCotizador('consolas', 'ps5')">🕹️ PlayStation 5</button>
-    </div>
+<div class="card">
+
+<label>Consola</label>
+<select id="consola" onchange="loadServices()"></select>
+
+<label>Servicio</label>
+<select id="servicio" onchange="calc()"></select>
+
+<label>Cliente</label>
+<input id="cliente">
+
+<label>Describe tu falla</label>
+<textarea id="obs"></textarea>
+
+<div class="result">
+💰 Precio: <span id="precio">$0</span><br>
+⏱ Tiempo: <span id="tiempo">-</span><br>
+<div class="total">TOTAL: <span id="total">$0</span></div>
 </div>
 
-<div id="seccionCotizador" class="seccion-cotizador">
-    <button class="btn-volver" id="btnAtrasFlujo">← Volver</button>
-    
-    <div id="tituloModelo" class="section-title">Modelo</div>
-    <div id="gridPiezas" class="grid"></div>
+<button class="wa" onclick="sendWA()">📲 WhatsApp</button>
+<button class="pay" onclick="agendar()">💳 Anticipo y agendar</button>
 
-    <div class="resumen-box">
-        <p id="list" style="color: #ccc; margin: 5px 0; font-size: 14px;">Ningún servicio seleccionado</p>
-        <div id="txtSubtotal" style="font-size:14px; color:#aaa; display:none;">Subtotal: $<span id="valSubtotal">0</span></div>
-        <div class="total">$<span id="total">0</span> MXN</div>
-        <div id="descuentoBox" class="descuento-box">💥 ¡Descuento 15% aplicado! Ahorras: -$<span id="valAhorro">0</span></div>
-        <div class="tiempo-total">⏱️ Tiempo aproximado: <span id="tiempo">0</span></div>
-        
-        <button class="btn wsp" id="send">Enviar a WhatsApp</button> <br>
-        <button class="btn clear" id="clear">Limpiar</button>
-        <button class="btn hist" id="toggleHistory">Historial</button>
-    </div>
+<button class="link" onclick="window.open('https://deathmaskxe.github.io/CotizadorXE/')">
+🕹 Cotizador de Controles
+</button>
+
+<button class="link" onclick="window.open('https://deathmaskxe.github.io/Tester-de-funcionalidad-controles/')">
+🎮 Tester de Controles
+</button>
+
 </div>
 
-<div id="history"></div>
+<!-- PAGOS -->
+<div class="paybox">
+
+<h3>💳 Datos de pago</h3>
+
+<p>🏦 Banorte</p>
+<p>4189 1400 1021 7767</p>
+<p>Irving Daniel Sánchez</p>
+
+<hr>
+
+<p>💼 MercadoPago</p>
+<p>722969020089368829</p>
+<p>Irving Daniel Sánchez Nava</p>
+
+<p style="color:#00ffff;">
+Envía comprobante por WhatsApp para confirmar cita
+</p>
+
+</div>
+
+</div>
 
 <script>
-const phone = "527471731852";
-const historyBox = document.getElementById("history");
-let tipoFlujoActivo = ""; 
-let modeloActivo = "";
 
-const BD_SERVICIOS = {
-    controles: {
-        xbox: {
-            titulo: "🎮 Xbox Series (Control)",
-            piezas: [
-                {n: "Joystick", p: 300, t: "10 min", tm: 10}, {n: "Tmr", p: 450, t: "10 min", tm: 10},
-                {n: "Bumper", p: 250, t: "5 min", tm: 5}, {n: "Microswitch LB y RB", p: 250, t: "10 min", tm: 10},
-                {n: "Gatillo", p: 300, t: "15 min", tm: 15}, {n: "D-pad", p: 250, t: "10 min", tm: 10},
-                {n: "Puerto tipo C", p: 300, t: "30 min", tm: 30}, {n: "Jack de audífonos", p: 200, t: "5 min", tm: 5},
-                {n: "Capuchón par", p: 60, t: "5 min", tm: 5}, {n: "Color de led", p: 50, t: "10 min", tm: 10},
-                {n: "Goma conductiva A,B,X,Y", p: 250, t: "10 min", tm: 10}
-            ]
-        },
-        dualsense: {
-            titulo: "🎮 DualSense PS5 (Control)",
-            piezas: [
-                {n: "Joystick", p: 300, t: "10 min", tm: 10}, {n: "Tmr", p: 450, t: "10 min", tm: 10},
-                {n: "Puerto tipo c", p: 300, t: "30 min", tm: 30}, {n: "Jack de audífonos", p: 350, t: "30 min", tm: 30},
-                {n: "Capuchón par", p: 60, t: "5 min", tm: 5}, {n: "Membrana de botones", p: 280, t: "30 min", tm: 30},
-                {n: "Gomas conductivas", p: 250, t: "20 min", tm: 20}, {n: "Batería", p: 550, t: "10 min", tm: 10},
-                {n: "Motor áptico", p: 400, t: "10 min", tm: 10}, {n: "Motor adaptativo", p: 500, t: "40 min", tm: 40}
-            ]
-        },
-        joycon: {
-            titulo: "🎮 Joycon Switch (Control)",
-            piezas: [
-                {n: "Joystick", p: 300, t: "10 min", tm: 10}, {n: "Tmr", p: 450, t: "10 min", tm: 10},
-                {n: "Flex sincronizar", p: 280, t: "10 min", tm: 10}, {n: "Batería", p: 400, t: "5 min", tm: 5},
-                {n: "Botón L o R", p: 300, t: "30 min", tm: 30}, {n: "Riel", p: 350, t: "20 min", tm: 20}
-            ]
-        },
-        elite: {
-            titulo: "🎮 Elite Series 2 (Control)",
-            piezas: [
-                {n: "Joystick", p: 450, t: "10 min", tm: 10}, {n: "Tmr", p: 550, t: "10 min", tm: 10},
-                {n: "Bumper", p: 300, t: "5 min", tm: 5}, {n: "Microswitch LB y RB", p: 350, t: "10 min", tm: 10},
-                {n: "Gatillo", p: 500, t: "15 min", tm: 15}, {n: "D-pad", p: 300, t: "10 min", tm: 10},
-                {n: "Puerto tipo C", p: 500, t: "30 min", tm: 30}, {n: "Jack de audífonos", p: 200, t: "5 min", tm: 5},
-                {n: "Thumbstick metálico kit", p: 600, t: "5 min", tm: 5}, {n: "Goma conductiva A,B,X,Y", p: 350, t: "10 min", tm: 10}
-            ]
-        },
-        edge: {
-            titulo: "🎮 DualSense Edge (Control)",
-            piezas: [
-                {n: "Joystick", p: 450, t: "10 min", tm: 10}, {n: "Tmr", p: 550, t: "10 min", tm: 10},
-                {n: "Puerto tipo c", p: 500, t: "30 min", tm: 30}, {n: "Jack de audífonos", p: 450, t: "30 min", tm: 30},
-                {n: "Capuchón par", p: 200, t: "15 min", tm: 15}, {n: "Membrana de botones", p: 380, t: "30 min", tm: 30},
-                {n: "Gomas conductivas", p: 300, t: "20 min", tm: 20}, {n: "Batería", p: 650, t: "10 min", tm: 10},
-                {n: "Motor áptico", p: 500, t: "10 min", tm: 10}, {n: "Motor adaptativo", p: 600, t: "40 min", tm: 40}
-            ]
-        }
-    },
-    consolas: {
-        xbone: {
-            titulo: "🕹️ Xbox One (Fat)",
-            piezas: [
-                {n: "Mantenimiento", p: 600, t: "1 hra", tm: 60}, {n: "Cambio de ventilador", p: 400, t: "15 min", tm: 15},
-                {n: "Cambio módulo inalámbrico", p: 400, t: "15 min", tm: 15}, {n: "Cambio panel frontal", p: 600, t: "15 min", tm: 15},
-                {n: "Reparación corto en mosfet", p: 900, t: "1 hra", tm: 60}, {n: "Reparación corto en Realtek", p: 900, t: "40 min", tm: 40},
-                {n: "Reparación filtros o ESD", p: 900, t: "1 hra", tm: 60}, {n: "Reparación HDMI", p: 900, t: "1 hra", tm: 60},
-                {n: "Reparación IC Power", p: 1000, t: "1 hra", tm: 60}
-            ]
-        },
-        xbones: {
-            titulo: "🕹️ Xbox One S",
-            piezas: [
-                {n: "Mantenimiento", p: 600, t: "1 hra", tm: 60}, {n: "Cambio de ventilador", p: 500, t: "15 min", tm: 15},
-                {n: "Cambio módulo inalámbrico", p: 500, t: "15 min", tm: 15}, {n: "Cambio de panel frontal", p: 600, t: "15 min", tm: 15},
-                {n: "Reparación corto en mosfet", p: 1000, t: "1 hra", tm: 60}, {n: "Reparación corto en Realtek", p: 1000, t: "40 min", tm: 40},
-                {n: "Reparación corto en filtros", p: 600, t: "30 min", tm: 30}, {n: "Reparación ESD", p: 1200, t: "1 hra", tm: 60},
-                {n: "Reparación HDMI", p: 1000, t: "1 hra", tm: 60}, {n: "Reparación IC Power", p: 1200, t: "1 hra", tm: 60},
-                {n: "Reparación retimer", p: 1000, t: "1 hra", tm: 60}, {n: "Cambio de carcasa", p: 800, t: "30 min", tm: 30}
-            ]
-        },
-        xbseriess: {
-            titulo: "🕹️ Xbox Series S",
-            piezas: [
-                {n: "Mantenimiento", p: 1200, t: "1 hra", tm: 60}, {n: "Cambio de HDMI", p: 1300, t: "1 hra", tm: 60},
-                {n: "Cambio módulo Bluetooth", p: 800, t: "10 min", tm: 10}, {n: "Cambio módulo wifi", p: 900, t: "10 min", tm: 10},
-                {n: "Reparación retimer", p: 1500, t: "1 hra", tm: 60}, {n: "Reparación ESD", p: 1800, t: "4 hrs", tm: 240},
-                {n: "Reparación SSD", p: 2300, t: "2 hrs", tm: 120}, {n: "Reparación puerto ethernet", p: 1200, t: "1 hra", tm: 60},
-                {n: "Reparación controlador ram, apu", p: 2000, t: "2 hrs", tm: 120}, {n: "Reparación mosfet", p: 1500, t: "2 hrs", tm: 120},
-                {n: "Reparación fuente", p: 900, t: "3 hrs", tm: 180}, {n: "Cambio fuente", p: 1200, t: "20 min", tm: 20},
-                {n: "Cambio ventilador", p: 1000, t: "10 min", tm: 10}
-            ]
-        },
-        xbseriesx: {
-            titulo: "🕹️ Xbox Series X",
-            piezas: [
-                {n: "Mantenimiento", p: 1500, t: "1 hra", tm: 60}, {n: "Cambio de HDMI", p: 1500, t: "1 hra", tm: 60},
-                {n: "Cambio módulo Bluetooth", p: 1000, t: "10 min", tm: 10}, {n: "Cambio módulo wifi", p: 1000, t: "10 min", tm: 10},
-                {n: "Reparación retimer", p: 1800, t: "1 hra", tm: 60}, {n: "Reparación ESD", p: 2200, t: "5 hrs", tm: 300},
-                {n: "Reparación SSD", p: 5000, t: "2 hrs", tm: 120}, {n: "Reparación puerto ethernet", p: 1500, t: "1 hra", tm: 60},
-                {n: "Reparación controlador ram, apu", p: 2600, t: "2 hrs", tm: 120}, {n: "Reparación mosfet", p: 1800, t: "2 hrs", tm: 120},
-                {n: "Reparación fuente", p: 1200, t: "3 hrs", tm: 180}, {n: "Cambio fuente", p: 1500, t: "20 min", tm: 20},
-                {n: "Cambio ventilador", p: 1400, t: "10 min", tm: 10}
-            ]
-        },
-        ps4slim: {
-            titulo: "🕹️ PS4 Slim o Fat",
-            piezas: [
-                {n: "Mantenimiento", p: 700, t: "1 hra", tm: 60}, {n: "Cambio disco duro 1 TB", p: 2000, t: "1 hra", tm: 60},
-                {n: "Cambio disco duro 500GB", p: 1600, t: "1 hra", tm: 60}, {n: "Cambio HDMI", p: 1000, t: "1 hra", tm: 60},
-                {n: "Cambio IC video Encoder", p: 1100, t: "1 hra", tm: 60}, {n: "Reparación lectora", p: 1000, t: "2 hrs", tm: 120}
-            ]
-        },
-        ps4pro: {
-            titulo: "🕹️ PlayStation 4 Pro",
-            piezas: [
-                {n: "Mantenimiento", p: 900, t: "1 hra", tm: 60}, {n: "Cambio disco duro 1 TB", p: 2000, t: "1 hra", tm: 60},
-                {n: "Cambio disco duro 500GB", p: 1600, t: "1 hra", tm: 60}, {n: "Cambio HDMI", p: 1000, t: "1 hra", tm: 60},
-                {n: "Cambio IC video Encoder", p: 1100, t: "1 hra", tm: 60}, {n: "Reparación lectora", p: 1200, t: "2 hrs", tm: 120}
-            ]
-        },
-        ps5: {
-            titulo: "🕹️ PlayStation 5",
-            piezas: [
-                {n: "Mantenimiento", p: 1500, t: "1 hra", tm: 60}, {n: "Cambio chipset SSD", p: 2400, t: "1 hra", tm: 60},
-                {n: "Cambio HDMI", p: 1500, t: "1 hra", tm: 60}, {n: "Cambio IC video Encoder", p: 1500, t: "1 hra", tm: 60},
-                {n: "Reparación fuente alimentación", p: 1200, t: "2 hrs", tm: 120}, {n: "Cambio fuente alimentación", p: 1800, t: "30 min", tm: 30},
-                {n: "Cambio de Southbridge", p: 2500, t: "3 hrs", tm: 180}, {n: "Cambio de BIOS", p: 2000, t: "3 hrs", tm: 180},
-                {n: "Reparación de IC, fusible", p: 2000, t: "4 hrs", tm: 240}
-            ]
-        }
-    }
+const data = {
+
+"Xbox One":[
+["Revisión / Diagnóstico",200,"1 a 2 días"],
+["Mantenimiento",600,"1 Hora"],
+["Cambio ventilador",400,"15 Min"],
+["Cambio módulo inalámbrico",400,"15 Min"],
+["Panel frontal",600,"15 Min"],
+["MOSFET",900,"1 Hora"],
+["Realtek",900,"40 Min"],
+["Filtros o ESD",900,"1 Hora"],
+["HDMI",900,"1 Hora"],
+["IC Power",1000,"1 Hora"]
+],
+
+"Xbox One S":[
+["Revisión / Diagnóstico",200,"1 a 2 días"],
+["Mantenimiento",600,"1 Hora"],
+["Ventilador",500,"15 Min"],
+["Módulo inalámbrico",500,"15 Min"],
+["Panel frontal",600,"15 Min"],
+["MOSFET",1000,"1 Hora"],
+["Realtek",1000,"40 Min"],
+["Filtros",600,"1 Hora"],
+["ESD",1200,"1 Hora"],
+["HDMI",1000,"1 Hora"],
+["IC Power",1200,"1 Hora"],
+["Retimer",1000,"1 Hora"],
+["Carcasa",800,"30 Min"]
+],
+
+"Xbox Series S":[
+["Revisión / Diagnóstico",200,"1 a 2 días"],
+["Mantenimiento",1200,"1 Hora"],
+["HDMI",1300,"1 Hora"],
+["Bluetooth",800,"10 Min"],
+["WiFi",900,"10 Min"],
+["Retimer",1500,"1 Hora"],
+["ESD",1800,"4 Hrs"],
+["SSD",2300,"2 Hrs"],
+["Ethernet",1200,"1 Hora"],
+["RAM/APU",2000,"2 Hrs"],
+["MOSFET",1500,"2 Hrs"],
+["Fuente",900,"3 Hrs"],
+["Cambio fuente",1200,"20 Min"],
+["Ventilador",1000,"10 Min"]
+],
+
+"Xbox Series X":[
+["Revisión / Diagnóstico",200,"1 a 2 días"],
+["Mantenimiento",1500,"1 Hora"],
+["HDMI",1500,"1 Hora"],
+["Bluetooth",1000,"10 Min"],
+["WiFi",1000,"10 Min"],
+["Retimer",1800,"1 Hora"],
+["ESD",2200,"5 Hrs"],
+["SSD",5000,"2 Hrs"],
+["Ethernet",1500,"1 Hora"],
+["RAM/APU",2600,"2 Hrs"],
+["MOSFET",1800,"2 Hrs"],
+["Fuente",1200,"3 Hrs"],
+["Cambio fuente",1500,"20 Min"],
+["Ventilador",1400,"10 Min"]
+],
+
+"PS4":[
+["Revisión / Diagnóstico",200,"1 a 2 días"],
+["Mantenimiento",700,"1 Hora"],
+["Disco 1TB",2000,"1 Hora"],
+["Disco 500GB",1600,"1 Hora"],
+["HDMI",1000,"1 Hora"],
+["Encoder",1100,"1 Hora"],
+["Lectora",1000,"2 Hrs"]
+],
+
+"PS4 Pro":[
+["Revisión / Diagnóstico",200,"1 a 2 días"],
+["Mantenimiento",900,"1 Hora"],
+["Disco 1TB",2000,"1 Hora"],
+["Disco 500GB",1600,"1 Hora"],
+["HDMI",1000,"1 Hora"],
+["Encoder",1100,"1 Hora"],
+["Lectora",1200,"2 Hrs"]
+],
+
+"PS5":[
+["Revisión / Diagnóstico",200,"1 a 2 días"],
+["Mantenimiento",1500,"1 Hora"],
+["SSD chipset",2400,"1 Hora"],
+["HDMI",1500,"1 Hora"],
+["Encoder",1500,"1 Hora"],
+["Fuente",1200,"2 Hrs"],
+["Cambio fuente",1800,"30 Min"],
+["Southbridge",2500,"3 Hrs"],
+["BIOS",2000,"3 Hrs"],
+["IC/Fusible",2000,"4 Hrs"]
+]
+
 };
 
-function irAFlujo(flujo) {
-    tipoFlujoActivo = flujo;
-    document.getElementById("menuRaiz").style.setProperty("display", "none", "important");
-    document.getElementById("flujoControles").style.display = "none";
-    document.getElementById("flujoConsolas").style.display = "none";
-    
-    if(flujo === 'controles') {
-        document.getElementById("flujoControles").style.setProperty("display", "flex", "important");
-    } else {
-        document.getElementById("flujoConsolas").style.setProperty("display", "flex", "important");
-    }
+let c=document.getElementById("consola");
+let s=document.getElementById("servicio");
+
+Object.keys(data).forEach(x=>{
+let o=document.createElement("option");
+o.value=x;
+o.textContent=x;
+c.appendChild(o);
+});
+
+function loadServices(){
+s.innerHTML="";
+data[c.value].forEach(x=>{
+let o=document.createElement("option");
+o.value=x[0];
+o.textContent=x[0];
+s.appendChild(o);
+});
+calc();
 }
 
-function volverAlMenuRaiz() {
-    document.getElementById("flujoControles").style.display = "none";
-    document.getElementById("flujoConsolas").style.display = "none";
-    document.getElementById("seccionCotizador").style.display = "none";
-    document.getElementById("menuRaiz").style.setProperty("display", "flex", "important");
-    historyBox.style.display = "none";
+function calc(){
+let d=data[c.value].find(x=>x[0]===s.value);
+if(d){
+precio.innerText="$"+d[1];
+tiempo.innerText=d[2];
+total.innerText="$"+d[1];
+}
 }
 
-function mostrarCotizador(flujo, modelo) {
-    tipoFlujoActivo = flujo;
-    modeloActivo = BD_SERVICIOS[flujo][modelo].titulo;
-    
-    document.getElementById("flujoControles").style.display = "none";
-    document.getElementById("flujoConsolas").style.display = "none";
-    document.getElementById("seccionCotizador").style.setProperty("display", "block", "important");
-    document.getElementById("tituloModelo").textContent = modeloActivo;
-    
-    document.getElementById("btnAtrasFlujo").onclick = () => {
-        document.getElementById("seccionCotizador").style.display = "none";
-        irAFlujo(flujo);
-    };
+function sendWA(){
+let msg=`🎮 XE SERVICIO ELECTRÓNICO
 
-    const grid = document.getElementById("gridPiezas");
-    grid.innerHTML = "";
-    
-    BD_SERVICIOS[flujo][modelo].piezas.forEach(p => {
-        let item = document.createElement("div");
-        item.className = "item";
-        item.dataset.name = p.n;
-        item.dataset.price = p.p;
-        item.dataset.time = p.t;
-        item.dataset.minutos = p.tm;
-        item.innerHTML = `${p.n} <div class="price-time">$${p.p} • ${p.t}</div>`;
-        
-        item.onclick = () => {
-            item.classList.toggle("active");
-            update();
-        };
-        grid.appendChild(item);
-    });
-    update();
+👤 ${cliente.value}
+🕹 ${c.value}
+🔧 ${s.value}
+
+💰 ${total.innerText}
+⏱ ${tiempo.innerText}
+
+📝 ${obs.value}`;
+
+window.open("https://wa.me/527471731852?text="+encodeURIComponent(msg));
 }
 
-function minAHorasTexto(minutosTotales) {
-    if (minutosTotales < 60) return `${minutosTotales} min`;
-    let horas = Math.floor(minutosTotales / 60);
-    let mins = minutosTotales % 60;
-    return mins > 0 ? `${horas} hr y ${mins} min` : `${horas} hr`;
+function agendar(){
+let msg=`💳 XE SERVICIO ELECTRÓNICO
+
+📅 AGENDAR REPARACIÓN
+
+👤 ${cliente.value}
+🕹 ${c.value}
+🔧 ${s.value}
+
+💰 ${total.innerText}
+💳 Anticipo $200
+
+🏦 Banorte / MercadoPago
+Enviar comprobante`;
+
+window.open("https://wa.me/527471731852?text="+encodeURIComponent(msg));
 }
 
-function update(){
-    let subtotal = 0;
-    let minutosTotales = 0;
-    let list = [];
-    const items = document.querySelectorAll(".item");
+</script>
 
-    items.forEach(i=>{
-        if(i.classList.contains("active")){
-            subtotal += Number(i.dataset.price);
-            minutosTotales += Number(i.dataset.minutos);
-            list.push(i.dataset.name);
-        }
-    });
-
-    let descuento = 0;
-    let totalNeto = subtotal;
-
-    if(tipoFlujoActivo === "controles" && subtotal >= 600) {
-        descuento = Math.round(subtotal * 0.15);
-        totalNeto = subtotal - descuento;
-        
-        document.getElementById("txtSubtotal").style.display = "block";
-        document.getElementById("valSubtotal").textContent = subtotal;
-        document.getElementById("descuentoBox").style.display = "block";
-        document.getElementById("valAhorro").textContent = descuento;
-    } else {
-        document.getElementById("txtSubtotal").style.display = "none";
-        document.getElementById("descuentoBox").style.display = "none";
-    }
-
-    document.getElementById("total").textContent = totalNeto;
-    document.getElementById("tiempo").textContent = minAHorasTexto(minutosTotales);
-    document.getElementById("list").textContent = list.length ? list.join(", ") : "Ningún servicio seleccionado";
-
-    document.getElementById("send").onclick = () => {
-        if(!list.length) return;
-        saveHistory(subtotal, totalNeto, descuento, list);
-        
-        let msg = `🛠️ *XE SERVICIO ELECTRÓNICO*\n`;
-        msg += `⚡ _Cotización de Servicio_\n\n`;
-        msg += `📦 *Modelo:* ${modeloActivo}\n`;
-        msg += `📝 *Servicios:* \n${list.map(p=>"• "+p).join("\n")}\n\n`;
-        msg += `⏱️ *Tiemp
+</body>
+</html>
