@@ -62,6 +62,11 @@ box-shadow:0 0 20px #00ffff,0 0 40px #8a2be2;
 animation:xePulse 2s infinite;
 }
 
+@keyframes xePulse{
+0%,100%{transform:scale(1);}
+50%{transform:scale(1.08);}
+}
+
 .neon{
 text-align:center;
 font-size:18px;
@@ -154,15 +159,22 @@ border:1px solid #00ffff;
 
 <button class="wa" onclick="sendWA()">WhatsApp</button>
 <button class="pay" onclick="agendar()">Anticipo y agendar</button>
-
 <button class="clear" onclick="clearAll()">🧹 Limpiar cotización</button>
+
+<button class="link" onclick="window.open('https://deathmaskxe.github.io/CotizadorXE/')">
+Cotizador Controles
+</button>
+
+<button class="link" onclick="window.open('https://deathmaskxe.github.io/Tester-de-funcionalidad-controles/')">
+Tester Controles
+</button>
 
 </div>
 
 <div class="paybox">
 <h3>Pagos</h3>
 <p>Anticipo mínimo: $200 MXN</p>
-<p>Para agendar: envío obligatorio de comprobante</p>
+<p>Requiere envío de comprobante para agendar</p>
 <p>Banorte: 4189 1400 1021 7767</p>
 <p>MercadoPago: 722969020089368829</p>
 </div>
@@ -171,7 +183,9 @@ border:1px solid #00ffff;
 
 <script>
 
+/* ✅ TODAS LAS CONSOLAS COMPLETAS RESTAURADAS */
 const data={
+
 "Xbox One":[
 ["Revisión / Diagnóstico",200],
 ["Mantenimiento",600],
@@ -180,16 +194,92 @@ const data={
 ["Cambio de panel frontal",600],
 ["Reparación corto en mosfet",900],
 ["Reparación corto en Realtek",900],
+["Reparación corto en filtros o ESD",900],
 ["Reparación HDMI",900],
 ["Reparación IC Power",1000]
+],
+
+"Xbox One S":[
+["Revisión / Diagnóstico",200],
+["Mantenimiento",600],
+["Cambio de ventilador",500],
+["Cambio de módulo inalámbrico",500],
+["Cambio de panel frontal",600],
+["Reparación corto en mosfet",1000],
+["Reparación corto en Realtek",1000],
+["Reparación corto en filtros",600],
+["Reparación ESD",1200],
+["Reparación HDMI",1000],
+["Reparación IC Power",1200],
+["Reparación retimer",1000],
+["Cambio de carcasa",800]
+],
+
+"Xbox Series S":[
+["Revisión / Diagnóstico",200],
+["Mantenimiento",1200],
+["Cambio de HDMI",1300],
+["Cambio módulo Bluetooth",800],
+["Cambio módulo wifi",900],
+["Reparación retimer",1500],
+["Reparación ESD",1800],
+["Reparación SSD",2300],
+["Reparación ethernet",1200],
+["RAM/APU",2000],
+["MOSFET",1500],
+["Fuente",900],
+["Cambio fuente",1200],
+["Ventilador",1000]
+],
+
+"Xbox Series X":[
+["Revisión / Diagnóstico",200],
+["Mantenimiento",1500],
+["Cambio HDMI",1500],
+["Bluetooth",1000],
+["WiFi",1000],
+["Retimer",1800],
+["ESD",2200],
+["SSD",5000],
+["Ethernet",1500],
+["RAM/APU",2600],
+["MOSFET",1800],
+["Fuente",1200],
+["Cambio fuente",1500],
+["Ventilador",1400]
+],
+
+"PS4":[
+["Revisión / Diagnóstico",200],
+["Mantenimiento",700],
+["Disco 1TB",2000],
+["Disco 500GB",1600],
+["HDMI",1000],
+["IC Encoder",1100],
+["Lectora",1000]
+],
+
+"PS4 Pro":[
+["Revisión / Diagnóstico",200],
+["Mantenimiento",900],
+["Disco 1TB",2000],
+["Disco 500GB",1600],
+["HDMI",1000],
+["IC Encoder",1100],
+["Lectora",1200]
 ],
 
 "PS5":[
 ["Revisión / Diagnóstico",200],
 ["Mantenimiento",1500],
-["Cambio chipset SSD",2400],
-["Cambio HDMI",1500],
-["Reparación fuente",1200]
+["SSD chipset",2400],
+["HDMI",1500],
+["IC Encoder",1500],
+["Fuente",1200],
+["Cambio fuente",1800],
+["Southbridge",2500],
+["BIOS",2000],
+["IC/Fusible",2000]
 ],
 
 "Nintendo Switch":[
@@ -198,7 +288,10 @@ const data={
 ["Magia OLED",2000],
 ["IC de carga",1000],
 ["IC MT92T36",1300],
-["IC backlight",1000]
+["IC backlight (sin video)",1000],
+["Ventilador",600],
+["Centro de carga",650],
+["Mantenimiento",600]
 ]
 
 };
@@ -219,16 +312,12 @@ function loadServices(){
 s1.innerHTML="";
 s2.innerHTML="";
 
-let none1=document.createElement("option");
-none1.value=0;
-none1.textContent="Ningún servicio";
+let none=document.createElement("option");
+none.value=0;
+none.textContent="Ningún servicio";
 
-let none2=document.createElement("option");
-none2.value=0;
-none2.textContent="Ningún servicio";
-
-s1.appendChild(none1);
-s2.appendChild(none2);
+s1.appendChild(none.cloneNode(true));
+s2.appendChild(none.cloneNode(true));
 
 data[c.value].forEach(x=>{
 let o1=document.createElement("option");
@@ -257,7 +346,7 @@ document.getElementById("disc").innerText="$"+disc.toFixed(2);
 document.getElementById("total").innerText="$"+(sub-disc);
 }
 
-/* 🔥 FIX WHATSAPP */
+/* WHATSAPP CON SERVICIOS */
 function sendWA(){
 
 let serv1=s1.options[s1.selectedIndex].text;
@@ -265,28 +354,25 @@ let serv2=s2.options[s2.selectedIndex].text;
 
 let msg=`🛠 XE SERVICIO ELECTRÓNICO
 
-👤 Cliente: ${cliente.value}
-🎮 Consola: ${c.value}
+Cliente: ${cliente.value}
+Consola: ${c.value}
 
-🔧 Servicio 1: ${serv1}
-🔧 Servicio 2: ${serv2}
+Servicio 1: ${serv1}
+Servicio 2: ${serv2}
 
-💰 Total: ${document.getElementById("total").innerText}
+Total: ${document.getElementById("total").innerText}
 
-📝 Falla: ${obs.value}`;
+Falla: ${obs.value}`;
 
 window.open("https://wa.me/527471731852?text="+encodeURIComponent(msg));
 }
 
-/* 💳 AGENDAR */
 function agendar(){
 
 let msg=`💳 XE SERVICIO ELECTRÓNICO
 
-📅 Solicitud de reparación
-
-⚠️ Anticipo mínimo: $200 MXN
-📩 Requiere envío de comprobante
+Anticipo mínimo: $200 MXN
+Requiere comprobante para agendar
 
 Cliente: ${cliente.value}
 Consola: ${c.value}
